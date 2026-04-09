@@ -308,26 +308,27 @@
     gap: 1rem;
   }
   .social-card {
-    border: 1px solid rgba(226,179,194,0.2);
-    border-radius: 16px;
-    padding: 1.8rem;
-    display: flex; align-items: center; gap: 1rem;
-    text-decoration: none;
-    transition: background .2s, transform .2s;
-    cursor: pointer;
+  border: 1px solid rgba(120,23,39,0.15);
+  border-radius: 16px;
+  padding: 1.8rem;
+  display: flex; align-items: center; gap: 1rem;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+  cursor: pointer;
+  background: rgba(255, 139, 166, 0.824);
   }
-  .social-card:hover { background: rgba(242,175,188,0.1); transform: translateY(-4px); }
-  .social-icon {
-    width: 46px; height: 46px;
-    border-radius: 12px;
-    background: rgba(242,175,188,0.15);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-    flex-shrink: 0;
+  .social-card:hover { background: rgba(194, 78, 101, 0.92); transform: translateY(-4px); }
+.social-icon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  background: rgb(145, 37, 55);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
   }
   .social-info { min-width: 0; }
-  .social-info strong { display: block; color: var(--rose); font-size: 0.85rem; letter-spacing: 1px; }
-  .social-info span { color: var(--puce); font-size: 0.78rem; word-break: break-all; }
+ .social-info strong { display: block; color: var(--scarlet); font-size: 0.85rem; letter-spacing: 1px; }
+.social-info span { color: var(--ruby); font-size: 0.78rem; word-break: break-all; }
 
   /* ── FOOTER ── */
   footer {
@@ -498,8 +499,11 @@
     <p class="section-label">✦ a little about me</p>
     <h2 class="section-title">hii everyone!</h2>
     <div class="about-wrap">
-      <div class="aboutimages/BUS app cropped.jpg-avatar" id="avatarSlot">
-        🎀
+      <div class="about-avatar" id="avatarSlot">
+                         
+        <div class="about-avatar" id="avatarSlot">
+  <img src="images/persona.png" style="width:100%; height:100%; object-fit:cover; border-radius:27px;" />
+</div>
         <!-- Drop illustration here later -->
       </div>
       <div class="about-text">

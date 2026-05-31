@@ -18,9 +18,7 @@
     --oatmilk: #F2E0D2;
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--oatmilk);
@@ -54,8 +52,6 @@
   }
   .nav-links a:hover { color: var(--wine); }
 
-
-  
   /* ── HERO ── */
   #hero {
     min-height: 100vh;
@@ -179,97 +175,111 @@
     margin-bottom: 3rem;
   }
 
-  /* ── SKILLS ── */
-  #skills { background: var(--oatmilk); }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+  /* ── WORK — INFINITE SCROLL ── */
+  #work {
+    background: var(--rose);
+    padding: 6rem 0;
+    overflow: hidden;
   }
-  .skill-card {
-    background: white;
-    border: 1px solid rgba(120,23,39,0.1);
-    border-radius: 20px;
-    padding: 2.4rem 2rem;
+  #work .section-inner {
+    padding: 0 2rem;
+  }
+  #work .section-title {
+    padding: 0 2rem;
+  }
+
+  .marquee-wrapper {
     position: relative;
+    width: 100%;
     overflow: hidden;
-    transition: transform .3s, box-shadow .3s;
-  }
-  .skill-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(120,23,39,0.14); }
-  .skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    border-radius: 20px 20px 0 0;
-  }
-  .skill-card:nth-child(1)::before { background: linear-gradient(90deg, var(--wine), var(--puce)); }
-  .skill-card:nth-child(2)::before { background: linear-gradient(90deg, var(--puce), var(--pearl)); }
-  .skill-card:nth-child(3)::before { background: linear-gradient(90deg, var(--ruby), var(--wine)); }
-
-  .skill-icon {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-  .skill-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--scarlet);
-    margin-bottom: 0.8rem;
-  }
-  .skill-card p {
-    font-size: 0.9rem;
-    color: var(--puce);
-    line-height: 1.7;
-  }
-  .skill-tags {
-    margin-top: 1.4rem;
-    display: flex; flex-wrap: wrap; gap: 6px;
-  }
-  .tag {
-    font-size: 0.7rem;
-    letter-spacing: 1px;
-    background: rgba(226,179,194,0.3);
-    color: var(--ruby);
-    border-radius: 999px;
-    padding: 4px 12px;
+    /* fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   }
 
-  /* ── WORK / PLACEHOLDER ── */
-  #work { background: var(--rose); }
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.4rem;
+  .marquee-track {
+    display: flex;
+    gap: 1.6rem;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+    will-change: transform;
   }
+
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
   .work-card {
+    flex-shrink: 0;
+    width: 320px;
     border-radius: 20px;
     background: white;
     overflow: hidden;
-    transition: transform .3s, box-shadow .3s;
     border: 1px solid rgba(120,23,39,0.08);
+    transition: transform .35s cubic-bezier(.22,.68,0,1.2), box-shadow .35s;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
   }
-  .work-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(120,23,39,0.16); }
-  .work-placeholder {
+  .work-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 28px 60px rgba(120,23,39,0.22);
+  }
+
+  .work-card img {
+    width: 100%;
     height: 220px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
-    color: white;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
   }
-  .wp1 { background: linear-gradient(135deg, var(--scarlet), var(--ruby)); }
-  .wp2 { background: linear-gradient(135deg, var(--puce), var(--pearl)); }
-  .wp3 { background: linear-gradient(135deg, var(--wine), var(--puce)); }
-  .work-info { padding: 1.4rem 1.6rem; }
-  .work-info h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--scarlet); }
-  .work-info p  { font-size: 0.82rem; color: var(--puce); margin-top: 4px; }
+  .work-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .work-info {
+    padding: 1.4rem 1.6rem 1.6rem;
+  }
+  .work-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--scarlet);
+    margin-bottom: 4px;
+  }
+  .work-info p {
+    font-size: 0.8rem;
+    color: var(--puce);
+    letter-spacing: 0.5px;
+  }
+  .work-info .arrow {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--wine);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity .25s, transform .25s;
+  }
+  .work-card:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   .work-add-note {
     text-align: center;
-    margin-top: 2.5rem;
+    margin-top: 2.8rem;
     font-size: 0.82rem;
     letter-spacing: 1px;
     color: var(--puce);
     font-style: italic;
+    padding: 0 2rem;
   }
 
   /* ── ABOUT ── */
@@ -290,6 +300,10 @@
     font-size: 6rem;
     color: var(--wine);
     border: 3px solid rgba(120,23,39,0.15);
+    overflow: hidden;
+  }
+  .about-avatar img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 27px;
   }
   .about-text p {
     color: var(--ruby);
@@ -298,7 +312,7 @@
   }
   .about-text p + p { margin-top: 1rem; }
 
-  /* ── SOCIALS ── */
+  /* ── CONNECT ── */
   #connect { background: var(--scarlet); padding: 6rem 2rem; }
   #connect .section-label { color: var(--puce); }
   #connect .section-title { color: var(--rose); }
@@ -308,27 +322,27 @@
     gap: 1rem;
   }
   .social-card {
-  border: 1px solid rgba(120,23,39,0.15);
-  border-radius: 16px;
-  padding: 1.8rem;
-  display: flex; align-items: center; gap: 1rem;
-  text-decoration: none;
-  transition: background .2s, transform .2s;
-  cursor: pointer;
-  background: rgba(255, 139, 166, 0.824);
+    border: 1px solid rgba(120,23,39,0.15);
+    border-radius: 16px;
+    padding: 1.8rem;
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    transition: background .2s, transform .2s;
+    cursor: pointer;
+    background: rgba(255, 139, 166, 0.824);
   }
   .social-card:hover { background: rgba(194, 78, 101, 0.92); transform: translateY(-4px); }
-.social-icon {
-  width: 46px; height: 46px;
-  border-radius: 12px;
-  background: rgb(145, 37, 55);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-  flex-shrink: 0;
+  .social-icon {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: rgb(145, 37, 55);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
   }
   .social-info { min-width: 0; }
- .social-info strong { display: block; color: var(--scarlet); font-size: 0.85rem; letter-spacing: 1px; }
-.social-info span { color: var(--ruby); font-size: 0.78rem; word-break: break-all; }
+  .social-info strong { display: block; color: var(--scarlet); font-size: 0.85rem; letter-spacing: 1px; }
+  .social-info span { color: var(--ruby); font-size: 0.78rem; word-break: break-all; }
 
   /* ── FOOTER ── */
   footer {
@@ -339,7 +353,7 @@
   }
   footer p { font-size: 0.78rem; color: var(--pearl); letter-spacing: 1px; }
 
-  /* ── CURSOR DOT ── */
+  /* ── CURSOR ── */
   .cursor {
     width: 10px; height: 10px;
     background: var(--wine);
@@ -363,9 +377,7 @@
     opacity: 0.55;
   }
 </style>
-
-  <link rel="icon" type="image/png" href="images/persona-removebg-preview.png" />
-
+<link rel="icon" type="image/png" href="images/persona-removebg-preview.png" />
 </head>
 <body>
 
@@ -376,7 +388,6 @@
 <nav>
   <span class="nav-logo">Sherry</span>
   <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#connect">Connect</a></li>
@@ -395,7 +406,7 @@
     <span class="italic">my&nbsp;</span><span class="fill">PORTFO</span>LIO
   </h1>
 
-  <p class="hero-sub">Dillustrating, coding experiences and crafting brands </p>
+  <p class="hero-sub">Illustrating, coding experiences and crafting brands</p>
 
   <div class="hero-cta">
     <a href="#work" class="btn btn-primary">See my work</a>
@@ -408,89 +419,68 @@
   </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-inner">
-    <p class="section-label">✦ what I do</p>
-    <h2 class="section-title">Skills &amp; Craft</h2>
-    <div class="skills-grid">
-
-      <div class="skill-card">
-        <span class="skill-icon">🎨</span>
-        <h3>Illustration &amp; Drawing</h3>
-        <p>Character design, digital illustration, and concept art. I bring ideas to life with a distinct visual style — expressive, detailed, and full of personality.</p>
-        <div class="skill-tags">
-          <span class="tag">Procreate</span>
-          <span class="tag">Adobe Illustrator</span>
-          <span class="tag">Character Design</span>
-          <span class="tag">Concept Art</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <span class="skill-icon">💻</span>
-        <h3>Coding</h3>
-        <p>Front-end development with a designer's eye. I build interfaces that are not just functional but beautiful — clean code married to strong aesthetics.</p>
-        <div class="skill-tags">
-          <span class="tag">HTML / CSS</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">React</span>
-          <span class="tag">Responsive Design</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <span class="skill-icon">✦</span>
-        <h3>Mockups &amp; Branding</h3>
-        <p>Brand identity, UI mockups, and visual systems. From logo to color palette to full brand kit — I craft cohesive identities that leave an impression.</p>
-        <div class="skill-tags">
-          <span class="tag">Figma</span>
-          <span class="tag">canvas</span>
-          <span class="tag">Brand Identity</span>
-          <span class="tag">UI/UX</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- WORK -->
+<!-- WORK — infinite horizontal scroll -->
 <section id="work">
   <div class="section-inner">
     <p class="section-label">✦ selected projects</p>
     <h2 class="section-title">Work</h2>
-    <div class="work-grid">
-
-<a href="https://www.behance.net/gallery/245821697/UI-design-mokup-for-a-tracking-bus-APP" target="_blank" rel="noopener" class="work-card" style="display:block; text-decoration:none;">
-  <img src="images/BUS app cropped.jpg" style="width:100%; height:220px; object-fit:cover;" />
-  <div class="work-info">
-    <h3>Brand Identity</h3>
-    <p>Branding / visual system </p>
   </div>
-</a>
 
-      <a href="https://www.behance.net/gallery/247300105/card1" target="_blank" rel="noopener" class="work-card" style="display:block; text-decoration:none;">
-        <!--div class="work-placeholder wp2">Your illustration here</div -->
-        <img src="images/draw6.png" style="width:100%; height:220px; object-fit:cover;" />
+  <div class="marquee-wrapper">
+    <div class="marquee-track" id="marquee-track">
+
+      <!-- Card 1 -->
+      <a href="https://www.behance.net/gallery/245821697/UI-design-mokup-for-a-tracking-bus-APP"
+         target="_blank" rel="noopener" class="work-card">
+        <img src="images\coming_page-0001 (1).jpg" alt="Bus Tracking App UI" />
         <div class="work-info">
-          <h3>Illustration Project</h3>
-          <p> Digital illustration / character design</p>
+          <h3>Bus Tracking App UI</h3>
+          <p>UI Design / Mockup</p>
+          <span class="arrow">View on Behance →</span>
         </div>
       </a>
 
-      <div class="work-card">
-        <!--div class="work-placeholder wp3">Your project here</div -->
-        <img src="images/ramy.png" style="width:100%; height:220px; object-fit:cover;" />
+
+      <!-- Card 2 -->
+      <a href="https://www.behance.net/gallery/247300105/card1"
+         target="_blank" rel="noopener" class="work-card">
+        <img src="images/draw6.png" alt="Illustration Project" />
+        <div class="work-info">
+          <h3>Illustration Project</h3>
+          <p>Digital illustration / character design</p>
+          <span class="arrow">View on Behance →</span>
+        </div>
+      </a>
+
+
+      <!-- Card 3 -->
+        <a href="https://www.behance.net/gallery/250306187/Win-Rak_-prototype-of-a-transportation-APP"
+         target="_blank" rel="noopener" class="work-card">
+        <img src="images/win rak.png" alt="Graphic Design Project" />
+        <div class="work-info">
+          <h3>Graphic Design Project</h3>
+          <p>Graphic design / branding</p>
+          <span class="arrow">View on Behance →</span>
+        </div>
+      </a>
+    
+      <!-- Card 4 -->
+      <a href="https://github.com/mouna0986/AI-EXPO-2025-2026--DarijaReview-Intelligence-Platform"
+         target="_blank" rel="noopener" class="work-card">
+        <img src="images/ramy.png" alt="Web Project" />
         <div class="work-info">
           <h3>Web Project</h3>
-          <p>Front-end development / UI design</p>
+          <p>Front-end & backend development / UI design</p>
+          <span class="arrow">View on GitHub →</span>
         </div>
-      </div>
+      </a>
+
+      <!-- ↓↓ Add more cards here as your portfolio grows ↓↓ -->
 
     </div>
-    <p class="work-add-note">✦ More pieces coming soon — stay tuned ✦</p>
   </div>
+
+  <p class="work-add-note">✦ More pieces coming soon — stay tuned ✦</p>
 </section>
 
 <!-- ABOUT -->
@@ -500,11 +490,7 @@
     <h2 class="section-title">hii everyone!</h2>
     <div class="about-wrap">
       <div class="about-avatar" id="avatarSlot">
-                         
-        <div class="about-avatar" id="avatarSlot">
-  <img src="images/persona.png" style="width:100%; height:100%; object-fit:cover; border-radius:27px;" />
-</div>
-        <!-- Drop illustration here later -->
+        <img src="images/persona.png" alt="Sherry" />
       </div>
       <div class="about-text">
         <p>I'm a multidisciplinary creative who lives at the intersection of art, design, and code. Whether I'm sketching characters, building interfaces, or crafting brand identities, I put the same care and attention into every pixel.</p>
@@ -565,40 +551,41 @@
 </footer>
 
 <script>
-  const cur = document.getElementById('cur');
+  /* ── Custom cursor ── */
+  const cur  = document.getElementById('cur');
   const ring = document.getElementById('ring');
   document.addEventListener('mousemove', e => {
-    cur.style.left = e.clientX + 'px';
-    cur.style.top  = e.clientY + 'px';
+    cur.style.left  = e.clientX + 'px';
+    cur.style.top   = e.clientY + 'px';
     setTimeout(() => {
       ring.style.left = e.clientX + 'px';
       ring.style.top  = e.clientY + 'px';
     }, 60);
   });
 
-  const cards = document.querySelectorAll('.skill-card, .work-card, .social-card');
-  cards.forEach(c => {
-    c.addEventListener('mouseenter', () => {
-      ring.style.width = '52px';
-      ring.style.height = '52px';
-    });
-    c.addEventListener('mouseleave', () => {
-      ring.style.width = '32px';
-      ring.style.height = '32px';
-    });
+  /* ── Cursor ring expand on interactive cards ── */
+  document.querySelectorAll('.work-card, .social-card').forEach(c => {
+    c.addEventListener('mouseenter', () => { ring.style.width = '52px'; ring.style.height = '52px'; });
+    c.addEventListener('mouseleave', () => { ring.style.width = '32px'; ring.style.height = '32px'; });
   });
 
+  /* ── Duplicate marquee cards for seamless loop ── */
+  const track = document.getElementById('marquee-track');
+  const clone  = track.innerHTML;
+  track.innerHTML += clone; // duplicate so loop is seamless
+
+  /* ── Scroll-reveal for about + connect sections ── */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
+        e.target.style.opacity    = '1';
+        e.target.style.transform  = 'translateY(0)';
       }
     });
   }, { threshold: 0.12 });
 
-  document.querySelectorAll('.skill-card, .work-card, .social-card, .about-avatar, .about-text').forEach(el => {
-    el.style.opacity = '0';
+  document.querySelectorAll('.social-card, .about-avatar, .about-text').forEach(el => {
+    el.style.opacity   = '0';
     el.style.transform = 'translateY(32px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     obs.observe(el);

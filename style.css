@@ -1,0 +1,64 @@
+/* PASTE THIS AT THE VERY BOTTOM OF style.css */
+
+/* WORK SLIDER */
+
+.work-slider{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+}
+
+.work-track{
+  display:flex;
+  gap:1.5rem;
+
+  overflow-x:auto;
+  scroll-behavior:smooth;
+
+  scrollbar-width:none;
+}
+
+.work-track::-webkit-scrollbar{
+  display:none;
+}
+
+.work-card{
+  min-width:340px;
+  flex-shrink:0;
+}
+
+.slider-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+
+  width:52px;
+  height:52px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.88);
+
+  color:var(--wine);
+
+  font-size:1.5rem;
+  cursor:pointer;
+
+  z-index:20;
+
+  transition:.2s;
+}
+
+.slider-btn:hover{
+  background:var(--wine);
+  color:white;
+}
+
+.prev{
+  left:12px;
+}
+
+.next{
+  right:12px;
+}
